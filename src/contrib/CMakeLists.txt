@@ -1,5 +1,7 @@
 project(lucene++-contrib)
 
+set(CMAKE_CXX_STANDARD 17)
+
 file(GLOB_RECURSE contrib_sources
   analyzers/*.cpp
   highlighter/*.cpp

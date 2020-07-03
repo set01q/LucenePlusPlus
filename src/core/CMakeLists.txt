@@ -1,5 +1,7 @@
 project(lucene++-lib)
 
+set(CMAKE_CXX_STANDARD 17)
+
 include_directories(
   "${lucene++_SOURCE_DIR}/include"
   "${lucene++-lib_SOURCE_DIR}/include"
