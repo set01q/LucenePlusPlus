@@ -32,6 +32,10 @@ if(NOT CMAKE_CONFIGURATION_TYPES AND NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE "Release")
 endif()
 
+option(LUCENE_BUILD_STATIC
+  "Build a static library"
+  OFF
+)
 option(ENABLE_PACKAGING
   "Create build scripts for creating lucene++ packages"
   OFF
@@ -117,6 +121,12 @@ if(MSVC)
 
   # enable exceptions, see http://msdn.microsoft.com/en-us/library/1deeycx5.aspx
   add_definitions(-EHsc)
+
+  # Disable including too many Windows headers
+  add_definitions(-DWIN32_LEAN_AND_MEAN)
+
+  # Disable the min/max macros that conflict with std::min/std::max
+  add_definitions(-DNOMINMAX)
 endif()
 
 if(NOT WIN32 AND NOT CMAKE_SYSTEM MATCHES "SunOS-5*.")
