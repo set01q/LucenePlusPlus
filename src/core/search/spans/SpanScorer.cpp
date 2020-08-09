@@ -76,6 +76,11 @@ double SpanScorer::score() {
     return norms ? raw * Similarity::decodeNorm(norms[doc]) : raw; // normalize
 }
 
+void SpanScorer::visitSubScorers(ScorerVisitor2 *visitor)
+{
+    visitor->visit(shared_from_this());
+}
+
 ExplanationPtr SpanScorer::explain(int32_t doc) {
     ExplanationPtr tfExplanation(newLucene<Explanation>());
 

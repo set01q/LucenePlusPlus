@@ -129,6 +129,27 @@ int32_t BooleanScorer2::advance(int32_t target) {
     return doc;
 }
 
+void BooleanScorer2::visitSubScorers(ScorerVisitor2 *visitor)
+{
+    if (countingSumScorer) {
+        countingSumScorer->visitSubScorers(visitor);
+    }
+    for (const ScorerPtr &scorer : requiredScorers) {
+        scorer->visitSubScorers(visitor);
+    }
+    for (const ScorerPtr &scorer : optionalScorers) {
+        scorer->visitSubScorers(visitor);
+    }
+    for (const ScorerPtr &scorer : prohibitedScorers) {
+        scorer->visitSubScorers(visitor);
+    }
+}
+
+float BooleanScorer2::termFreq()
+{
+    return countingSumScorer->termFreq();
+}
+
 Coordinator::Coordinator(const BooleanScorer2Ptr& scorer) {
     _scorer = scorer;
     maxCoord = 0;
@@ -178,6 +199,11 @@ int32_t SingleMatchScorer::nextDoc() {
 
 int32_t SingleMatchScorer::advance(int32_t target) {
     return scorer->advance(target);
+}
+
+void SingleMatchScorer::visitSubScorers(ScorerVisitor2 *visitor)
+{
+    scorer->visitSubScorers(visitor);
 }
 
 CountingDisjunctionSumScorer::CountingDisjunctionSumScorer(const BooleanScorer2Ptr& scorer, Collection<ScorerPtr> subScorers, int32_t minimumNrMatchers) : DisjunctionSumScorer(subScorers, minimumNrMatchers) {

@@ -56,6 +56,7 @@ public:
     virtual int32_t docID();
     virtual int32_t advance(int32_t target);
     virtual double score();
+    virtual void visitSubScorers(ScorerVisitor2 *visitor);
 };
 
 }

@@ -121,4 +121,9 @@ String TermScorer::toString() {
     return L"term scorer(" + weight->toString() + L")";
 }
 
+void TermScorer::visitSubScorers(ScorerVisitor2 *visitor)
+{
+    visitor->visit(shared_from_this());
+}
+
 }

@@ -22,6 +22,11 @@ namespace Lucene {
         
     };
 
+    class LPPAPI ScorerVisitor2 {
+        public:
+        virtual void visit(const DocIdSetIteratorPtr &docIdSetIterator) = 0;
+    };
+
 /// Common scoring functionality for different types of queries.
 ///
 /// A Scorer iterates over documents matching a query in increasing order of doc Id.
@@ -62,6 +67,9 @@ public:
     
     void visitScorers(ScorerVisitor *visitor);
     
+
+    virtual void visitSubScorers(ScorerVisitor2 *visitor) = 0;
+
     virtual float termFreq(){
         boost::throw_exception(RuntimeException(L"Freq not implemented"));
     }

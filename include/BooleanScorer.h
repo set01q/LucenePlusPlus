@@ -59,6 +59,7 @@ public:
     virtual double score();
     virtual void score(const CollectorPtr& collector);
     virtual String toString();
+    virtual void visitSubScorers(ScorerVisitor2 *visitor);
 
 };
 
@@ -106,6 +107,7 @@ public:
     virtual int32_t docID();
     virtual int32_t nextDoc();
     virtual double score();
+    virtual void visitSubScorers(ScorerVisitor2 *visitor);
 };
 
 class Bucket : public LuceneObject {

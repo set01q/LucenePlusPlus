@@ -54,6 +54,7 @@ public:
     virtual int32_t docID();
     virtual int32_t advance(int32_t target);
     virtual double score();
+    virtual void visitSubScorers(ScorerVisitor2 *visitor);
 
 protected:
     int32_t advanceToCommon(int32_t scorerDoc, int32_t disiDoc);

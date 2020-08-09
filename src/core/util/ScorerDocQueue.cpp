@@ -56,6 +56,11 @@ double ScorerDocQueue::topScore() {
     return topHSD->scorer->score();
 }
 
+float ScorerDocQueue::topTermFreq()
+{
+    return topHSD->scorer->termFreq();
+}
+
 bool ScorerDocQueue::topNextAndAdjustElsePop() {
     return checkAdjustElsePop(topHSD->scorer->nextDoc() != DocIdSetIterator::NO_MORE_DOCS);
 }

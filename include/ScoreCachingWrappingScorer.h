@@ -39,6 +39,7 @@ public:
     virtual int32_t nextDoc();
     virtual void score(const CollectorPtr& collector);
     virtual int32_t advance(int32_t target);
+    virtual void visitSubScorers(ScorerVisitor2 *visitor);
 
 protected:
     virtual bool score(const CollectorPtr& collector, int32_t max, int32_t firstDocID);

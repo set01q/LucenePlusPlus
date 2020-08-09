@@ -186,4 +186,9 @@ double FilteredQueryWeightScorer::score() {
     return weight->query->getBoost() * scorer->score();
 }
 
+void FilteredQueryWeightScorer::visitSubScorers(ScorerVisitor2 *visitor)
+{
+    scorer->visitSubScorers(visitor);
+}
+
 }

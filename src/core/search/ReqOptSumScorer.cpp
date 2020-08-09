@@ -45,4 +45,11 @@ double ReqOptSumScorer::score() {
     return optScorerDoc == curDoc ? reqScore + optScorer->score() : reqScore;
 }
 
+void ReqOptSumScorer::visitSubScorers(ScorerVisitor2 *visitor)
+{
+    reqScorer->visitSubScorers(visitor);
+    if (optScorer)
+        optScorer->visitSubScorers(visitor);
+}
+
 }

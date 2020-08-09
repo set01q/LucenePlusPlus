@@ -102,6 +102,11 @@ double PhraseScorer::currentFreq() {
     return freq;
 }
 
+void PhraseScorer::visitSubScorers(ScorerVisitor2 *visitor)
+{
+    visitor->visit(shared_from_this());
+}
+
 void PhraseScorer::init() {
     for (PhrasePositionsPtr pp(first); more && pp; pp = pp->_next) {
         more = pp->next();

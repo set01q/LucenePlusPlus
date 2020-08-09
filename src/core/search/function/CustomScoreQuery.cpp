@@ -334,4 +334,12 @@ int32_t CustomScorer::advance(int32_t target) {
     return doc;
 }
 
+void CustomScorer::visitSubScorers(ScorerVisitor2 *visitor)
+{
+    subQueryScorer->visitSubScorers(visitor);
+    for (const ScorerPtr &scorer : valSrcScorers) {
+        scorer->visitSubScorers(visitor);
+    }
+}
+
 }

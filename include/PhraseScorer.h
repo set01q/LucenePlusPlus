@@ -49,6 +49,8 @@ public:
     virtual float termFreq(){
         return currentFreq();
     }
+
+    virtual void visitSubScorers(ScorerVisitor2 *visitor);
     
     virtual String toString();
 

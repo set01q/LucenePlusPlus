@@ -36,6 +36,7 @@ public:
     virtual float termFreq(){
         return freq;
     }
+    virtual void visitSubScorers(ScorerVisitor2 *visitor);
 
 protected:
     virtual bool setFreqCurrentDoc();

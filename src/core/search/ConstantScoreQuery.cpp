@@ -154,4 +154,15 @@ int32_t ConstantScorer::advance(int32_t target) {
     return docIdSetIterator->advance(target);
 }
 
+void ConstantScorer::visitSubScorers(ScorerVisitor2 *visitor)
+{
+    visitor->visit(shared_from_this());
+    visitor->visit(docIdSetIterator);
+}
+
+float ConstantScorer::termFreq()
+{
+    return 0.0;
+}
+
 }

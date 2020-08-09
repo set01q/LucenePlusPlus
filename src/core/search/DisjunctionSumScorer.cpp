@@ -15,6 +15,7 @@ DisjunctionSumScorer::DisjunctionSumScorer(Collection<ScorerPtr> subScorers, int
     this->currentDoc = -1;
     this->_nrMatchers = -1;
     this->currentScore = std::numeric_limits<double>::quiet_NaN();
+    this->currentTermFreq = 0.0;
 
     this->nrScorers = subScorers.size();
 
@@ -75,6 +76,7 @@ bool DisjunctionSumScorer::advanceAfterCurrent() {
     do { // repeat until minimum nr of matchers
         currentDoc = scorerDocQueue->topDoc();
         currentScore = scorerDocQueue->topScore();
+        currentTermFreq = scorerDocQueue->topTermFreq();
         _nrMatchers = 1;
         do { // Until all subscorers are after currentDoc
             if (!scorerDocQueue->topNextAndAdjustElsePop()) {
@@ -86,6 +88,7 @@ bool DisjunctionSumScorer::advanceAfterCurrent() {
                 break;    // All remaining subscorers are after currentDoc.
             }
             currentScore += scorerDocQueue->topScore();
+            currentTermFreq += scorerDocQueue->topTermFreq();
             ++_nrMatchers;
         } while (true);
 
@@ -130,6 +133,16 @@ int32_t DisjunctionSumScorer::advance(int32_t target) {
             }
         }
     } while (true);
+}
+
+float DisjunctionSumScorer::termFreq()
+{
+    return currentTermFreq;
+}
+
+void DisjunctionSumScorer::visitSubScorers(ScorerVisitor2 *visitor)
+{
+    visitor->visit(shared_from_this());
 }
 
 }

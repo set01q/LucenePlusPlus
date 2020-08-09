@@ -89,6 +89,13 @@ int32_t DisjunctionMaxScorer::advance(int32_t target) {
     return doc;
 }
 
+void DisjunctionMaxScorer::visitSubScorers(ScorerVisitor2 *visitor)
+{
+    for (const ScorerPtr &scorer : subScorers) {
+        scorer->visitSubScorers(visitor);
+    }
+}
+
 void DisjunctionMaxScorer::heapify() {
     for (int32_t i = (numScorers >> 1) - 1; i >= 0; --i) {
         heapAdjust(i);

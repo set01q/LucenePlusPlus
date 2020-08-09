@@ -34,6 +34,8 @@ public:
     /// @return The score of the required scorer, eventually increased by the score of the optional scorer when
     /// it also matches the current document.
     virtual double score();
+
+    virtual void visitSubScorers(ScorerVisitor2 *visitor);
 };
 
 }

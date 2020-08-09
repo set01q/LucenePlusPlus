@@ -69,6 +69,8 @@ public:
         return freq;
     }
 
+    virtual void visitSubScorers(ScorerVisitor2 *visitor);
+
 protected:
     static const Collection<double> SIM_NORM_DECODER();
 

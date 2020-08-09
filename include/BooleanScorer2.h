@@ -61,6 +61,8 @@ public:
     virtual int32_t nextDoc();
     virtual double score();
     virtual int32_t advance(int32_t target);
+    virtual void visitSubScorers(ScorerVisitor2 *visitor);
+    virtual float termFreq();
 
 protected:
     ScorerPtr countingDisjunctionSumScorer(Collection<ScorerPtr> scorers, int32_t minNrShouldMatch);
@@ -120,6 +122,7 @@ public:
     virtual int32_t docID();
     virtual int32_t nextDoc();
     virtual int32_t advance(int32_t target);
+    virtual void visitSubScorers(ScorerVisitor2 *visitor);
 };
 
 class CountingDisjunctionSumScorer : public DisjunctionSumScorer {

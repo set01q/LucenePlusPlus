@@ -109,4 +109,20 @@ double ConjunctionScorer::score() {
     return sum * coord;
 }
 
+float ConjunctionScorer::termFreq()
+{
+    float freq = 0.0;
+    for (Collection<ScorerPtr>::iterator scorer = scorers.begin(); scorer != scorers.end(); ++scorer) {
+        freq += (*scorer)->termFreq();
+    }
+    return freq;
+}
+
+void ConjunctionScorer::visitSubScorers(ScorerVisitor2 *visitor)
+{
+    for (Collection<ScorerPtr>::iterator scorer = scorers.begin(); scorer != scorers.end(); ++scorer) {
+        (*scorer)->visitSubScorers(visitor);
+    }
+}
+
 }

@@ -29,6 +29,8 @@ public:
     virtual int32_t docID();
     virtual int32_t nextDoc();
     virtual double score();
+    virtual float termFreq();
+    virtual void visitSubScorers(ScorerVisitor2 *visitor);
 
 protected:
     int32_t doNext();

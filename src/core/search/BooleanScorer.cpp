@@ -168,6 +168,13 @@ String BooleanScorer::toString() {
     return buffer.str();
 }
 
+void BooleanScorer::visitSubScorers(ScorerVisitor2 *visitor)
+{
+    for (SubScorerPtr sub(scorers); sub; sub = sub->next) {
+        ScorerPtr(sub->scorer)->visitSubScorers(visitor);
+    }
+}
+
 BooleanScorerCollector::BooleanScorerCollector(int32_t mask, const BucketTablePtr& bucketTable) {
     this->mask = mask;
     this->_bucketTable = bucketTable;
@@ -234,6 +241,11 @@ int32_t BucketScorer::nextDoc() {
 
 double BucketScorer::score() {
     return _score;
+}
+
+void BucketScorer::visitSubScorers(ScorerVisitor2 *visitor)
+{
+    visitor->visit(shared_from_this());
 }
 
 Bucket::Bucket() {

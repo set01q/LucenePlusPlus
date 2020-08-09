@@ -46,6 +46,7 @@ protected:
     int32_t _nrMatchers;
 
     double currentScore;
+    float currentTermFreq;
 
 public:
     virtual void initialize();
@@ -69,6 +70,10 @@ public:
     /// @param target The target document number.
     /// @return the document whose number is greater than or equal to the given target, or -1 if none exist.
     virtual int32_t advance(int32_t target);
+
+    virtual float termFreq();
+
+    virtual void visitSubScorers(ScorerVisitor2 *visitor);
 
 protected:
     /// Called the first time next() or skipTo() is called to initialize scorerDocQueue.

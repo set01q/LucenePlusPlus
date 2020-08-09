@@ -45,6 +45,7 @@ public:
     int32_t topDoc();
 
     double topScore();
+    float topTermFreq();
     bool topNextAndAdjustElsePop();
     bool topSkipToAndAdjustElsePop(int32_t target);
 

@@ -128,4 +128,9 @@ int32_t MatchAllScorer::advance(int32_t target) {
     return doc;
 }
 
+void MatchAllScorer::visitSubScorers(ScorerVisitor2 *visitor)
+{
+    visitor->visit(shared_from_this());
+}
+
 }

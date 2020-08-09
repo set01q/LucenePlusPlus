@@ -131,4 +131,9 @@ double ValueSourceScorer::score() {
     return qWeight * vals->doubleVal(termDocs->doc());
 }
 
+void ValueSourceScorer::visitSubScorers(ScorerVisitor2 *visitor)
+{
+    visitor->visit(shared_from_this());
+}
+
 }

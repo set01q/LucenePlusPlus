@@ -81,4 +81,9 @@ int32_t ReqExclScorer::advance(int32_t target) {
     return doc;
 }
 
+void ReqExclScorer::visitSubScorers(ScorerVisitor2 *visitor)
+{
+    reqScorer->visitSubScorers(visitor);
+}
+
 }

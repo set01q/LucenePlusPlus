@@ -52,4 +52,9 @@ int32_t ScoreCachingWrappingScorer::advance(int32_t target) {
     return ScorerPtr(_scorer)->advance(target);
 }
 
+void ScoreCachingWrappingScorer::visitSubScorers(ScorerVisitor2 *visitor)
+{
+    ScorerPtr(_scorer)->visitSubScorers(visitor);
+}
+
 }
