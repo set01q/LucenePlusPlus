@@ -2,7 +2,6 @@
 # This file provides support for building the Lucene++ Documentation.
 # To build the documention, you will have to enable it
 # and then do the equivalent of "make doc".
-OPTION(ENABLE_DOCS "Build the Lucene++ documentation." OFF)
 
 MACRO(SET_YESNO)
     FOREACH(param ${ARGV})
@@ -124,10 +123,10 @@ IF (ENABLE_DOCS)
         ENDIF ( DOCS_TAGFILE )
 
         # This processes our Doxyfile.cmake and substitutes paths to generate a final Doxyfile
-        CONFIGURE_FILE("${PROJECT_SOURCE_DIR}/doc/Doxyfile.cmake" "${PROJECT_BINARY_DIR}/doc/doxyfile")
-        CONFIGURE_FILE("${PROJECT_SOURCE_DIR}/doc/helpheader.htm.cmake" "${PROJECT_BINARY_DIR}/doc/helpheader.htm")
-        CONFIGURE_FILE("${PROJECT_SOURCE_DIR}/doc/helpfooter.htm.cmake" "${PROJECT_BINARY_DIR}/doc/helpfooter.htm")
-        CONFIGURE_FILE("${PROJECT_SOURCE_DIR}/doc/doxygen.css.cmake" "${PROJECT_BINARY_DIR}/doc/html/doxygen.css")
+        CONFIGURE_FILE("${PROJECT_SOURCE_DIR}/doc/doxygen/Doxyfile.cmake" "${PROJECT_BINARY_DIR}/doc/doxyfile")
+        CONFIGURE_FILE("${PROJECT_SOURCE_DIR}/doc/doxygen/helpheader.htm.cmake" "${PROJECT_BINARY_DIR}/doc/helpheader.htm")
+        CONFIGURE_FILE("${PROJECT_SOURCE_DIR}/doc/doxygen/helpfooter.htm.cmake" "${PROJECT_BINARY_DIR}/doc/helpfooter.htm")
+        CONFIGURE_FILE("${PROJECT_SOURCE_DIR}/doc/doxygen/doxygen.css.cmake" "${PROJECT_BINARY_DIR}/doc/html/doxygen.css")
 
         #create a target for tar.gz html help
         FIND_PACKAGE(UnixCommands)
